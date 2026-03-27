@@ -1,0 +1,16 @@
+[
+  {"name": "Nieman Lab", "url": "https://www.niemanlab.org/feed/", "count": 7},
+  {"name": "Columbia Journalism Review", "url": "https://www.cjr.org/feed", "count": 3},
+  {"name": "Baekdal", "url": "https://www.baekdal.com/feed/"},
+  {"name": "Mediagazer", "url": "http://mediagazer.com/feed.xml", "count": 10},
+  {"name": "Mediawatch", "url": "http://mediawatch.dk/rss/seneste.rss", "count": 8},
+  {"name": "The Guardian", "url": "http://www.theguardian.com/media/rss", "count": 4},
+  {"name": "What Nieman is reading", "url": "http://www.niemanlab.org/reading/feed/", "count": 2},
+  {"name": "Stratechery", "url": "https://rss.stratechery.passport.online/feed/rss/CJq9k19BunJjtxPPVwETGe", "count": 3},
+  {"name": "Techcrunch Europe", "url": "https://techcrunch.com/europe/feed/", "count": 6},
+  {"name": "BBC Tech", "url": "http://newsrss.bbc.co.uk/rss/newsonline_world_edition/technology/rss.xml", "count": 5},
+  {"name": "The Verge", "url": "http://www.theverge.com/rss/full.xml", "count": 5},
+  {"name": "Medietrends", "url": "http://www.medietrends.dk/feed/", "count": 5},
+  {"name": "Journalisten", "url": "http://journalisten.dk/feeds-alle.xml", "count": 5},
+  {"name": "Press Gazette", "url": "http://www.pressgazette.co.uk/rssfeed.xml", "count": 5}
+]

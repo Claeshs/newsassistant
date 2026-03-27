@@ -1,3 +1,4 @@
 feedparser==6.0.11
 requests==2.32.3
 tzdata==2025.1   # Nødvendig på Windows for timezones (ZoneInfo)
+google-generativeai>=0.8.0
