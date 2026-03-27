@@ -1,14 +1,17 @@
-import feedparser
-import time
 import json
 import os
+import time
+
+import feedparser
+
 import store_and_latest
 
 DEFAULT_COUNT = 5
 DB_PATH = "articles.db"
 FEEDS_FILE = "feeds.json"
 
-def fetch_all_feeds():
+
+def fetch_all_feeds() -> None:
     conn = store_and_latest.connect(DB_PATH)
     total_new_articles = 0
 
@@ -16,8 +19,8 @@ def fetch_all_feeds():
         print(f"Fejl: Filen '{FEEDS_FILE}' blev ikke fundet.")
         return
 
-    with open(FEEDS_FILE, "r", encoding="utf-8") as f:
-        feeds = json.load(f)
+    with open(FEEDS_FILE, "r", encoding="utf-8") as file_handle:
+        feeds = json.load(file_handle)
 
     for feed_info in feeds:
         name = feed_info["name"]
@@ -25,7 +28,7 @@ def fetch_all_feeds():
         count = feed_info.get("count", DEFAULT_COUNT)
 
         print(f"Henter feed: {name} ... ", end="", flush=True)
-        
+
         try:
             parsed = feedparser.parse(url)
             entries = parsed.entries[:count]
@@ -37,12 +40,10 @@ def fetch_all_feeds():
                     continue
 
                 guid = entry.get("id", link)
-                
-                # Tjek om vi allerede har artiklen via `should_skip_scrape`
+
                 if store_and_latest.should_skip_scrape(conn, link, guid):
                     continue
 
-                # Konverter dato til UTC ISO8601-format, hvis feedet tilbyder det
                 published_utc = None
                 if "published_parsed" in entry and entry.published_parsed:
                     published_utc = time.strftime("%Y-%m-%dT%H:%M:%SZ", entry.published_parsed)
@@ -58,17 +59,17 @@ def fetch_all_feeds():
                     "feed_excerpt": entry.get("summary", ""),
                 }
 
-                # Gem i databasen
                 store_and_latest.upsert_article(conn, item)
                 new_in_feed += 1
                 total_new_articles += 1
 
             print(f"Fandt {new_in_feed} nye artikler ud af {len(entries)} tjekkede.")
-            
-        except Exception as e:
-            print(f"Fejl under hentning: {e}")
+
+        except Exception as exc:
+            print(f"Fejl under hentning: {exc}")
 
     print(f"\nFærdig! {total_new_articles} nye artikler blev gemt i {DB_PATH}.")
+
 
 if __name__ == "__main__":
     fetch_all_feeds()
